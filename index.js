@@ -37,7 +37,14 @@ async function run() {
       res.send(result)
     })
 
-    
+    app.get('/rooms/:id' , async(req , res) => {
+      const id = req.params.id;
+      const query = {_id : new ObjectId(id)}
+      const room = await Roomcollections.findOne(query);
+      res.send(room)
+
+    })
+
 
 
     
