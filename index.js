@@ -29,6 +29,8 @@ async function run() {
 
     const database1 = client.db("RoomsDB");
     const Roomcollections = database1.collection("Rooms");
+    const database2 = client.db("MyBookingDB");
+    const Bookingcollections = database2.collection("MyBookings");
   
 
     app.get('/rooms', async (req, res) => {
@@ -43,6 +45,19 @@ async function run() {
       const room = await Roomcollections.findOne(query);
       res.send(room)
 
+    })
+
+    //my booking
+    app.get('/mybookings', async (req, res) => {
+      const cursor = Bookingcollections.find()
+      const result = await cursor.toArray();
+      res.send(result)
+    })
+
+    app.post('/mybookings', async (req, res) => {
+      const mybookings = req.body;
+      const result = await Bookingcollections.insertOne(mybookings);
+      res.send(result)
     })
 
 
