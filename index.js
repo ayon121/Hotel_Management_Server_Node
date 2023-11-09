@@ -56,10 +56,10 @@ async function run() {
 
     const database1 = client.db("RoomsDB");
     const Roomcollections = database1.collection("Rooms");
-    const database2 = client.db("MyBookingDB");
-    const Bookingcollections = database2.collection("MyBookings");
-    const database3 = client.db("ReviewDB");
-    const Reviewcollections = database3.collection("MyReview");
+    const database2 = client.db("MyBookDB");
+    const Bookingcollections = database2.collection("MyBook");
+    const database3 = client.db("ReviewssDB");
+    const Reviewcollections = database3.collection("MyReviewss");
 
 
 
@@ -102,7 +102,7 @@ async function run() {
 
       // }
       
-      const id = req.params.id;
+      const id = req.params?.id;
       const query = { _id: new ObjectId(id) }
       const room = await Roomcollections.findOne(query);
       res.send(room)
@@ -163,14 +163,14 @@ async function run() {
 
     })
 
-    app.delete('/mybookings/:id', async (req, res) => {
+    app.delete('/mybooking/:id', async (req, res) => {
       const id = req.params.id
       console.log('plz delete  from database', id);
       const query = { _id: new ObjectId(id) }
-      // const result = await Bookingcollections.deleteOne(query)
-      // res.send(result)
+      const result = await Bookingcollections.deleteOne(query)
+      res.send(result)
     })
-    9
+    
 
 
 
