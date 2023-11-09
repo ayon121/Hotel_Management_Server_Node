@@ -12,7 +12,11 @@ const cookieparser = require('cookie-parser')
 app.use(express.json())
 app.use(cookieparser())
 app.use(cors({
-  origin : ['http://localhost:5173'],
+  origin : [
+    // 'http://localhost:5173',
+    'https://hotel-management-beb7b.web.app',
+    'https://hotel-management-beb7b.firebaseapp.com/',
+  ],
   credentials : true
 }))
 
@@ -52,7 +56,7 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
 
-    await client.connect();
+    // await client.connect();
 
     const database1 = client.db("RoomsDB");
     const Roomcollections = database1.collection("Rooms");
@@ -74,9 +78,9 @@ async function run() {
       res
       .cookie('token',token , {
         httpOnly : true,
-        secure : false,   //set secure false for development purpose
+        secure : true,   //set secure false for development purpose
         
-        // sameSite : 'none',
+        sameSite : 'none',
 
       })
 
